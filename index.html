@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="En">
+<head>
+    <title>Datastore and Firebase Auth Example</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+
+</head>
+<body>
+<h1>Annual Planner App CPA Assignment 2</h1>
+<div id="firebase-auth-container"></div>
+<button id="sign-out" hidden="true">Sign out</button>
+<div id="login-info" hidden="true">
+    <h2>Login Info</h2>
+      {% if user_data %}
+        <dl>
+            <dt>Name:</dt><dd>{{ user_data['name'] }}</dd>
+            <dt>Email:</dt><dd>{{ user_data['email'] }}</dd>
+        </dl>
+        {% endif %}
+    <h2>Menu</h2>
+        <form action="/recent_events" method="post">
+            <input type="submit" value="Recent Events">
+        </form>
+<form action="/create_calendar" method="post">
+    <label>
+        Calendar Name: <input type="text" name="calendar_name" required>
+    </label><br>
+    <label>
+        Calendar Start Date: <input type="date" name="calendar_start_date" required>
+    </label><br>
+    <label>
+        Calendar End Date: <input type="date" name="calendar_end_date" required>
+    </label><br>
+    <label>
+        Calendar Start Time: <input type="time" name="calendar_start_time" required>
+    </label><br>
+    <label>
+        Calendar End Time: <input type="time" name="calendar_end_time" required>
+    </label><br>
+    <label>
+        Calendar Description: <textarea name="calendar_description"></textarea>
+    </label>
+    <input type="hidden" name="user_email" value="{{user_info.user_email}}">
+    <input type="submit" value="Create Calendar">
+</form>
+
+<form action="/create_event" method="post">
+    <label>
+        Event Name: <input type="text" name="event_name" required>
+    </label><br>
+    <label>
+        Event Date: <input type="date" name="event_date" required>
+    </label><br>
+    <label>
+        Event Start Time: <input type="time" name="event_start_time" required>
+    </label><br>
+    <label>
+        Event End Time: <input type="time" name="event_end_time" required>
+    </label><br>
+    <label>
+        Event Description: <textarea name="event_description"></textarea>
+    </label>
+    <input type="submit" value="Create Event">
+</form>
+        <h3>Calendar Actions</h3>
+<form action="/edit_calendar/{{ calendar_id }}" method="POST">
+    <label>
+        Calendar ID: <input type="text" name="calendar_id" required>
+    </label><br>
+    <input type="submit" value="Edit Calendar">
+</form>
+<form action="/update_calendar" method="GET">
+    <label>
+        <input type="text" name="calendar_id" placeholder="Enter calendar_id">
+    </label><br>
+    <input type="submit" value="Update Calendar">
+</form>
+
+<form action="/delete_calendar" method="GET">
+    <label>
+        <input type="text" name="calendar_id" placeholder="Enter calendar_id">
+    </label><br>
+    <input type="submit" value="Delete Calendar">
+</form>
+
+        <h3>Event Actions</h3>
+        <form action="/edit_event" method="post">
+            <label>
+                <input type="text" name="event_id" placeholder="Enter event_id">
+            </label>
+            <input type="submit" value="Edit Event">
+        </form>
+        <form action="/update_event" method="post">
+            <label>
+                <input type="text" name="event_id" placeholder="Enter event_id">
+            </label>
+            <input type="submit" value="Update Event">
+        </form>
+        <form action="/delete_event" method="post">
+            <label>
+                <input type="text" name="event_id" placeholder="Enter event_id">
+            </label>
+            <input type="submit" value="Delete Event">
+        </form>
+
+      {% for i in data %}
+      Name: {{ i['name'] }}<br/>
+      ID: {{ i['id'] }}<br/>
+      Boolean: {{ i['boolean'] }}<br/>
+      {% endfor %}
+        <p>Error Message: {{ error_message }}</p>
+</div>
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+
+</body>
+</html>

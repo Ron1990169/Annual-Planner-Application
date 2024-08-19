@@ -1,0 +1,32 @@
+indexes:
+- kind: calendar
+  properties:
+  - name: calendar_name
+  - name: event_id
+  - name: event_name
+  - name: calendar_id
+  - name: calendar_shared
+  - name: calendar_shared_id
+  - name: calendar_owner
+  - name: calendar_owner_id
+
+- kind: event
+  properties:
+  - name: day
+  - name: month
+  - name: year
+  - name: day_id
+  - name: event_start
+  - name: event_start_id
+  - name: event_end
+  - name: event_end_id
+  - name: event_description
+  - name: event_description_id
+  - name: event_name
+  - name: event_name_id
+  - name: event_shared
+  - name: event_shared_id
+
+
+# Path: CPA/Assignment/index.yaml
+
